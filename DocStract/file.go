@@ -60,12 +60,13 @@ func (d *DocStract) getName() {
 	case 0: //pdf
 		t = DocPDF
 		nameChunk = 2
+	case 1:
+		return
 	default: //html
 		switch {
 		case strings.Contains(chunks[0], "word"): //docx
 			nameChunk = 8
 			t = DocX
-			break
 		case strings.Contains(chunks[2], "worksheets"): //xlsx
 			t = DocXLSX
 			for i := 3; i < len(chunks); i++ {
@@ -74,7 +75,6 @@ func (d *DocStract) getName() {
 					break
 				}
 			}
-			break
 		default: //html
 			t = DocHTML
 		}
